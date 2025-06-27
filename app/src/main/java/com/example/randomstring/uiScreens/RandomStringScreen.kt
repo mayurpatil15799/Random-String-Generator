@@ -46,9 +46,11 @@ fun RandomStringScreen(
         onIntent(RandomStringIntent.LoadAll)
     }
 
-    Column(modifier = Modifier
-        .fillMaxSize()
-        .padding(16.dp)) {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp)
+    ) {
 
         Text("Random String Generator", style = MaterialTheme.typography.displayLarge)
 

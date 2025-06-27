@@ -6,7 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 
 @Database(entities = [RandomStringEntity::class], version = 1, exportSchema = false)
-abstract class RandomStringDatabase:RoomDatabase()  {
+abstract class RandomStringDatabase : RoomDatabase() {
     abstract fun randomStringDao(): RandomStringDao
 
     companion object {
