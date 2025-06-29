@@ -19,7 +19,7 @@ This Android app built using Jetpack Compose + MVI + Room + ContentProvider to g
 ## 🖼️ Preview
 
 
-https://github.com/user-attachments/assets/c3078989-76e1-4c39-abe4-6ce839a06a24
+https://github.com/user-attachments/assets/5f4dc340-df2d-4ea5-b6d1-09ac13228d76
 
 
 ---
