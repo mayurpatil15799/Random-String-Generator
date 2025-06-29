@@ -25,11 +25,11 @@ class MainActivity : ComponentActivity() {
         val factory = RandomStringViewModelFactory(repository)
         val viewModel: RandomStringViewModel = ViewModelProvider(this, factory)[RandomStringViewModel::class.java]
 
-
-
         enableEdgeToEdge()
         setContent {
-            RandomStringTheme {
+            val currentTheme = viewModel.theme.collectAsState().value
+
+            RandomStringTheme(darkTheme = currentTheme) {
                 RandomStringScreen(
                     state = viewModel.state.collectAsState().value,
                     onIntent = viewModel::handleIntent
@@ -39,18 +39,3 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    RandomStringTheme {
-        Greeting("Android")
-    }
-}

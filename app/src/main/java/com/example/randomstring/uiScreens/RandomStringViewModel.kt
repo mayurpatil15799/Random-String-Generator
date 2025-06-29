@@ -15,12 +15,16 @@ class RandomStringViewModel(
     private val _state = MutableStateFlow(RandomStringState())
     val state: StateFlow<RandomStringState> = _state
 
+    private val _theme = MutableStateFlow(false)
+    val theme: StateFlow<Boolean> = _theme
+
     fun handleIntent(intent: RandomStringIntent) {
         when (intent) {
             is RandomStringIntent.Generate -> generateString(intent.maxLength)
             is RandomStringIntent.DeleteItem -> deleteItem(intent.id)
             is RandomStringIntent.DeleteAll -> deleteAll()
             is RandomStringIntent.LoadAll -> observeAll()
+            RandomStringIntent.ToggleTheme -> toggleTheme()
         }
     }
 
@@ -55,4 +59,12 @@ class RandomStringViewModel(
             repository.deleteAllStrings()
         }
     }
+
+    fun toggleTheme(){
+        viewModelScope.launch {
+            _theme.value = !_theme.value
+            _state.value = _state.value.copy(isDarkTheme = _theme.value)
+        }
+    }
+
 }
