@@ -3,12 +3,15 @@ package com.example.randomstring.uiScreens
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.randomstring.repository.RandomStringRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
+import jakarta.inject.Inject
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
-class RandomStringViewModel(
+@HiltViewModel
+class RandomStringViewModel @Inject constructor(
     private val repository: RandomStringRepository
 ) : ViewModel() {
 
@@ -24,7 +27,7 @@ class RandomStringViewModel(
             is RandomStringIntent.DeleteItem -> deleteItem(intent.id)
             is RandomStringIntent.DeleteAll -> deleteAll()
             is RandomStringIntent.LoadAll -> observeAll()
-            RandomStringIntent.ToggleTheme -> toggleTheme()
+            is RandomStringIntent.ToggleTheme -> toggleTheme()
         }
     }
 

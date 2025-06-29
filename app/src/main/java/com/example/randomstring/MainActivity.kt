@@ -4,27 +4,27 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.viewModels
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.lifecycle.ViewModelProvider
+import com.example.randomstring.data.RandomStringDao
 import com.example.randomstring.data.RandomStringDatabase
 import com.example.randomstring.data.RandomStringEntity
-import com.example.randomstring.repository.RandomStringRepository
 import com.example.randomstring.ui.theme.RandomStringTheme
 import com.example.randomstring.uiScreens.RandomStringScreen
 import com.example.randomstring.uiScreens.RandomStringState
 import com.example.randomstring.uiScreens.RandomStringViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+
+    private val viewModel: RandomStringViewModel by viewModels()
+    lateinit var dao: RandomStringDao
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        val dao = RandomStringDatabase.getDatabase(applicationContext).randomStringDao()
-        val repository = RandomStringRepository(dao, applicationContext)
-        val factory = RandomStringViewModelFactory(repository)
-        val viewModel: RandomStringViewModel = ViewModelProvider(this, factory)[RandomStringViewModel::class.java]
-
+        dao = RandomStringDatabase.getDatabase(applicationContext).randomStringDao()
         enableEdgeToEdge()
         setContent {
             val currentTheme = viewModel.theme.collectAsState().value
@@ -37,7 +37,9 @@ class MainActivity : ComponentActivity() {
             }
         }
     }
+
 }
+
 
 @Preview(showBackground = true)
 @Composable

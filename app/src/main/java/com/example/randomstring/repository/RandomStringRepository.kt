@@ -7,8 +7,9 @@ import com.example.randomstring.data.RandomStringDao
 import com.example.randomstring.data.RandomStringEntity
 import com.example.randomstring.util.ContentProviderHelper
 import kotlinx.coroutines.flow.Flow
+import javax.inject.Inject
 
-class RandomStringRepository(
+class RandomStringRepository @Inject constructor(
     private val dao: RandomStringDao,
     private val context: Context
 ) {
