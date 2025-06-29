@@ -6,7 +6,7 @@ This Android app built using Jetpack Compose + MVI + Room + ContentProvider to g
 
 ## 🚀 Features
 
-- 💡 Generate random strings via a custom `ContentProvider`
+- 💡 Generate random strings using custom `ContentProvider` app
 - 🗃 Save and retrieve strings using Room database
 - 📃 Display saved strings in a responsive Jetpack Compose UI
 - 🧭 MVI architecture (Intent → ViewModel → State)
